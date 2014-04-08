@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E654C597-9C05-4690-8AD2-70C11AF8D3FC}</ProjectGuid>
+    <RootNamespace>kistcpp_lib</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../lib/\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Debug\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../lib/\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Release\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">rmcpD_x64</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">rmcp_x64</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../../include/;../../vender/windows/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)rmcpD.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../../include/;../../vender/windows(em64)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/;../../vender/windows/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)rmcp.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/;../../vender/windows(em64)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\dcspline.cpp" />
+    <ClCompile Include="..\..\src\dgqmatrix.cpp" />
+    <ClCompile Include="..\..\src\dinertia.cpp" />
+    <ClCompile Include="..\..\src\djacobian.cpp" />
+    <ClCompile Include="..\..\src\dmatrix.cpp" />
+    <ClCompile Include="..\..\src\donlp2.cpp" />
+    <ClCompile Include="..\..\src\donlp2_sub.cpp" />
+    <ClCompile Include="..\..\src\donmatrix.cpp" />
+    <ClCompile Include="..\..\src\dormatrix.cpp" />
+    <ClCompile Include="..\..\src\dpolynomial.cpp" />
+    <ClCompile Include="..\..\src\dquaternion.cpp" />
+    <ClCompile Include="..\..\src\drobotics.cpp" />
+    <ClCompile Include="..\..\src\dse3.cpp" />
+    <ClCompile Include="..\..\src\dso3.cpp" />
+    <ClCompile Include="..\..\src\dsqoptimize.cpp" />
+    <ClCompile Include="..\..\src\dssmatrix.cpp" />
+    <ClCompile Include="..\..\src\duquaternion.cpp" />
+    <ClCompile Include="..\..\src\dvector.cpp" />
+    <ClCompile Include="..\..\src\newx.cpp" />
+    <ClCompile Include="..\..\src\qsort_wkey.cpp" />
+    <ClCompile Include="..\..\src\user_eval.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\rmcp\dcspline.h" />
+    <ClInclude Include="..\..\include\rmcp\dgqmatrix.h" />
+    <ClInclude Include="..\..\include\rmcp\dinertia.h" />
+    <ClInclude Include="..\..\include\rmcp\djacobian.h" />
+    <ClInclude Include="..\..\include\rmcp\dmatrix.h" />
+    <ClInclude Include="..\..\include\rmcp\donmatrix.h" />
+    <ClInclude Include="..\..\include\rmcp\dormatrix.h" />
+    <ClInclude Include="..\..\include\rmcp\dpolynomial.h" />
+    <ClInclude Include="..\..\include\rmcp\dquaternion.h" />
+    <ClInclude Include="..\..\include\rmcp\drobotics.h" />
+    <ClInclude Include="..\..\include\rmcp\dse3.h" />
+    <ClInclude Include="..\..\include\rmcp\dso3.h" />
+    <ClInclude Include="..\..\include\rmcp\dsqobjectfn.h" />
+    <ClInclude Include="..\..\include\rmcp\dsqoptimize.h" />
+    <ClInclude Include="..\..\include\rmcp\dssmatrix.h" />
+    <ClInclude Include="..\..\include\rmcp\duquaternion.h" />
+    <ClInclude Include="..\..\include\rmcp\dvector.h" />
+    <ClInclude Include="..\..\include\rmcp\o8comm.h" />
+    <ClInclude Include="..\..\include\rmcp\o8cons.h" />
+    <ClInclude Include="..\..\include\rmcp\o8fint.h" />
+    <ClInclude Include="..\..\include\rmcp\o8fuco.h" />
+    <ClInclude Include="..\..\include\rmcp\o8gene.h" />
+    <ClInclude Include="..\..\include\rmcp\o8para.h" />
+    <ClInclude Include="..\..\include\rmcp\qsort_wkey.h" />
+    <ClInclude Include="..\..\include\rmcp\rmcp.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\fftw.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\fftw3.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\fftw3_mkl.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\fftw3_mkl_f77.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\fftw_mpi.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\fftw_threads.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\i_malloc.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_blas.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_boost_ublas_gemm.hpp" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_boost_ublas_matrix_prod.hpp" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_cblas.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_cdft.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_dfti.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_dss.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_dss_pardiso.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_gmp.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_lapack.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_pardiso.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_poisson.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_rci.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_scalapack.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_service.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_solver.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_spblas.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_trans.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_trig_transforms.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_types.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vml.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vml_defines.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vml_functions.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vml_types.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vsl.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vsl_defines.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vsl_functions.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vsl_types.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\rfftw.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\rfftw_mpi.h" />
+    <ClInclude Include="..\..\vender\windows\include\mkl\rfftw_threads.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\vender\windows\include\mkl\fftw_f77.i" />
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

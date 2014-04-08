@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+    <Filter Include="mkl">
+      <UniqueIdentifier>{f4729aa9-ca99-4adb-bee3-1be40ac7383d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\dcspline.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dgqmatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dinertia.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\djacobian.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dmatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\donlp2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\donlp2_sub.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\donmatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dormatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dpolynomial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dquaternion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\drobotics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dse3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dso3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dsqoptimize.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dssmatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\duquaternion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dvector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\newx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\qsort_wkey.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\user_eval.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\rmcp\dcspline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\dgqmatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\dinertia.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\djacobian.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\dmatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\donmatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\dormatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\dpolynomial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\dquaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\drobotics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\dse3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\dso3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\dsqobjectfn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\dsqoptimize.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\dssmatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\duquaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\dvector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\o8comm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\o8cons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\o8fint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\o8fuco.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\o8gene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\o8para.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\qsort_wkey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rmcp\rmcp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\fftw.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\fftw_mpi.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\fftw_threads.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\fftw3.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\fftw3_mkl.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\fftw3_mkl_f77.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\i_malloc.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_blas.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_boost_ublas_gemm.hpp">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_boost_ublas_matrix_prod.hpp">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_cblas.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_cdft.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_dfti.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_dss.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_dss_pardiso.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_gmp.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_lapack.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_pardiso.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_poisson.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_rci.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_scalapack.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_service.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_solver.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_spblas.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_trans.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_trig_transforms.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_types.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vml.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vml_defines.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vml_functions.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vml_types.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vsl.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vsl_defines.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vsl_functions.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\mkl_vsl_types.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\rfftw.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\rfftw_mpi.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\vender\windows\include\mkl\rfftw_threads.h">
+      <Filter>mkl</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="..\..\vender\windows\include\mkl\fftw_f77.i">
+      <Filter>mkl</Filter>
+    </None>
+  </ItemGroup>
+</Project>

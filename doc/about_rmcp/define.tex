@@ -1,0 +1,778 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   Define.tex
+%   ==========
+%
+%   By Yonghwan Oh
+%
+%   Oct. 29, 1995
+%
+%   Robotics. Lab.
+%   School of Mechanical Engineering
+%   Pohang University of Science & Technology
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{epsf.sty}    %   To input figure
+\sloppypar
+\flushbottom
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{property}{Property}
+\newtheorem{assumption}{Assumption}
+\newtheorem{remark}{\underline{\sf REMARKS}}[section]
+%
+%   New Definition
+%   ==============
+%
+\def\notation{
+    \sloppypar
+    \thispagestyle{empty}
+    {\underline{\Huge\bf Nomenclature}}     \\
+    \vspace*{1cm}                   \\
+    \tabular{rcl}
+}
+%\let\endnotation=\endtabular
+\def\endnotation{
+%   \endtabular\par\newpage \def\arraystretch{1.0}\setcounter{page}{1}
+    \endtabular\par\newpage \setcounter{page}{1}%
+}
+
+\def\magscale#1{scaled \magstep #1}
+\def\halfmag{scaled \magstephalf}
+\def\ptscale#1{scaled #100}
+%
+%   Definition for boldmath type
+%   ============================
+%
+\def\0{\mathbf{0}}
+\def\1{\mathbf{1}}
+\def\2{\mathbf{2}}
+\def\3{\mathbf{3}}
+\def\4{\mathbf{4}}
+\def\5{\mathbf{5}}
+\def\6{\mathbf{6}}
+\def\7{\mathbf{7}}
+\def\8{\mathbf{8}}
+\def\9{\mathbf{9}}
+%
+\def\A{\mbox{\boldmath$A$}}
+\def\B{\mbox{\boldmath$B$}}
+\def\C{\mbox{\boldmath$C$}}
+\def\D{\mbox{\boldmath$D$}}
+\def\E{\mbox{\boldmath$E$}}
+\def\F{\mbox{\boldmath$F$}}
+\def\G{\mbox{\boldmath$G$}}
+\def\H{\mbox{\boldmath$H$}}
+\def\I{\mbox{\boldmath$I$}}
+\def\J{\mbox{\boldmath$J$}}
+\def\K{\mbox{\boldmath$K$}}
+\def\L{\mbox{\boldmath$L$}}
+\def\M{\mbox{\boldmath$M$}}
+\def\N{\mbox{\boldmath$N$}}
+\def\O{\mbox{\boldmath$O$}}
+\def\P{\mbox{\boldmath$P$}}
+\def\Q{\mbox{\boldmath$Q$}}
+\def\R{\mbox{\boldmath$R$}}
+\def\S{\mbox{\boldmath$S$}}
+\def\T{\mbox{\boldmath$T$}}
+\def\U{\mbox{\boldmath$U$}}
+\def\V{\mbox{\boldmath$V$}}
+\def\W{\mbox{\boldmath$W$}}
+\def\X{\mbox{\boldmath$X$}}
+\def\Y{\mbox{\boldmath$Y$}}
+\def\Z{\mbox{\boldmath$Z$}}
+%
+\def\a{\mbox{\boldmath$a$}}
+\def\b{\mbox{\boldmath$b$}}
+\def\c{\mbox{\boldmath$c$}}
+\def\d{\mbox{\boldmath$d$}}
+\def\e{\mbox{\boldmath$e$}}
+\def\f{\mbox{\boldmath$f$}}
+\def\g{\mbox{\boldmath$g$}}
+\def\h{\mbox{\boldmath$h$}}
+\def\i{\mbox{\boldmath$i$}}
+\def\j{\mbox{\boldmath$j$}}
+\def\k{\mbox{\boldmath$k$}}
+\def\l{\mbox{\boldmath$l$}}
+\def\m{\mbox{\boldmath$m$}}
+\def\n{\mbox{\boldmath$n$}}
+\def\o{\mbox{\boldmath$o$}}
+\def\p{\mbox{\boldmath$p$}}
+\def\q{\mbox{\boldmath$q$}}
+\def\r{\mbox{\boldmath$r$}}
+\def\s{\mbox{\boldmath$s$}}
+\def\t{\mbox{\boldmath$t$}}
+\def\u{\mbox{\boldmath$u$}}
+\def\v{\mbox{\boldmath$v$}}
+\def\w{\mbox{\boldmath$w$}}
+\def\x{\mbox{\boldmath$x$}}
+\def\y{\mbox{\boldmath$y$}}
+\def\z{\mbox{\boldmath$z$}}
+%
+\def\bDel{\mbox{\boldmath$\Delta$}}
+\def\bGamma{\mbox{\boldmath$\Gamma$}}
+\def\bLambda{\mbox{\large\boldmath$\Lambda$}}
+\def\bOmega{\mbox{\boldmath$\Omega$}}
+\def\bPhi{\mbox{\boldmath$\Phi$}}
+\def\bPi{\mbox{\boldmath$\Pi$}}
+\def\bPsi{\mbox{\boldmath$\Psi$}}
+\def\bSigma{\mbox{\boldmath$\Sigma$}}
+\def\bTheta{\mbox{\boldmath$\Theta$}}
+\def\bUpsilon{\mbox{\boldmath$\Upsilon$}}
+\def\bXi{\mbox{\boldmath$\Xi$}}
+%
+\def\balpha{\mbox{\boldmath$\alpha$}}
+\def\bbeta{\mbox{\boldmath$\beta$}}
+\def\bdel{\mbox{\boldmath$\delta$}}
+\def\bgamma{\mbox{\boldmath$\gamma$}}
+\def\bepsilon{\mbox{\boldmath$\epsilon$}}
+\def\bvarepsilon{\mbox{\boldmath$\varepsilon$}}
+\def\bzeta{\mbox{\boldmath$\zeta$}}
+\def\Beta{\mbox{\boldmath$\eta$}}
+\def\btheta{\mbox{\boldmath$\theta$}}
+\def\bvartheta{\mbox{\boldmath$\vartheta$}}
+\def\biota{\mbox{\boldmath$\iota$}}
+\def\bkappa{\mbox{\boldmath$\kappa$}}
+\def\blambda{\mbox{\boldmath$\lambda$}}
+\def\bmu{\mbox{\boldmath$\mu$}}
+\def\bnu{\mbox{\boldmath$\nu$}}
+\def\bnabla{\mbox{\boldmath$\nabla$}}
+\def\bxi{\mbox{\boldmath$\xi$}}
+\def\bpi{\mbox{\boldmath$\pi$}}
+\def\bvarpi{\mbox{\boldmath$\varpi$}}
+\def\brho{\mbox{\boldmath$\rho$}}
+\def\bvarrho{\mbox{\boldmath$\varrho$}}
+\def\bsigma{\mbox{\boldmath$\sigma$}}
+\def\bvarsigma{\mbox{\boldmath$\varsigma$}}
+\def\btau{\mbox{\boldmath$\tau$}}
+\def\bupsilon{\mbox{\boldmath$\upsilon$}}
+\def\bphi{\mbox{\boldmath$\phi$}}
+\def\bvarphi{\mbox{\boldmath$\varphi$}}
+\def\bchi{\mbox{\boldmath$\chi$}}
+\def\bpsi{\mbox{\boldmath$\psi$}}
+\def\bomega{\mbox{\boldmath$\omega$}}
+%
+\def\tA{\mbox{\boldmath$\tilde{A}$}}
+\def\tB{\mbox{\boldmath$\tilde{B}$}}
+\def\tC{\mbox{\boldmath$\tilde{C}$}}
+\def\tD{\mbox{\boldmath$\tilde{D}$}}
+\def\tE{\mbox{\boldmath$\tilde{E}$}}
+\def\tF{\mbox{\boldmath$\tilde{F}$}}
+\def\tG{\mbox{\boldmath$\tilde{G}$}}
+\def\tH{\mbox{\boldmath$\tilde{H}$}}
+\def\tI{\mbox{\boldmath$\tilde{I}$}}
+\def\tJ{\mbox{\boldmath$\tilde{J}$}}
+\def\tK{\mbox{\boldmath$\tilde{K}$}}
+\def\tL{\mbox{\boldmath$\tilde{L}$}}
+\def\tM{\mbox{\boldmath$\tilde{M}$}}
+\def\tN{\mbox{\boldmath$\tilde{N}$}}
+\def\tO{\mbox{\boldmath$\tilde{O}$}}
+\def\tP{\mbox{\boldmath$\tilde{P}$}}
+\def\tQ{\mbox{\boldmath$\tilde{Q}$}}
+\def\tR{\mbox{\boldmath$\tilde{R}$}}
+\def\tS{\mbox{\boldmath$\tilde{S}$}}
+\def\tT{\mbox{\boldmath$\tilde{T}$}}
+\def\tU{\mbox{\boldmath$\tilde{U}$}}
+\def\tV{\mbox{\boldmath$\tilde{V}$}}
+\def\tW{\mbox{\boldmath$\tilde{W}$}}
+\def\tX{\mbox{\boldmath$\tilde{X}$}}
+\def\tY{\mbox{\boldmath$\tilde{Y}$}}
+\def\tZ{\mbox{\boldmath$\tilde{Z}$}}
+%
+\def\ta{\mbox{\boldmath$\tilde{a}$}}
+\def\tb{\mbox{\boldmath$\tilde{b}$}}
+\def\tc{\mbox{\boldmath$\tilde{c}$}}
+\def\td{\mbox{\boldmath$\tilde{d}$}}
+\def\te{\mbox{\boldmath$\tilde{e}$}}
+\def\tf{\mbox{\boldmath$\tilde{f}$}}
+\def\tg{\mbox{\boldmath$\tilde{g}$}}
+\def\th{\mbox{\boldmath$\tilde{h}$}}
+\def\ti{\mbox{\boldmath$\tilde{i}$}}
+\def\tj{\mbox{\boldmath$\tilde{j}$}}
+\def\tk{\mbox{\boldmath$\tilde{k}$}}
+\def\tl{\mbox{\boldmath$\tilde{l}$}}
+\def\tm{\mbox{\boldmath$\tilde{m}$}}
+\def\tn{\mbox{\boldmath$\tilde{n}$}}
+\def\to{\mbox{\boldmath$\tilde{o}$}}
+\def\tp{\mbox{\boldmath$\tilde{p}$}}
+\def\tq{\mbox{\boldmath$\tilde{q}$}}
+\def\tr{\mbox{\boldmath$\tilde{r}$}}
+\def\ts{\mbox{\boldmath$\tilde{s}$}}
+\def\tu{\mbox{\boldmath$\tilde{u}$}}
+\def\tv{\mbox{\boldmath$\tilde{v}$}}
+\def\tw{\mbox{\boldmath$\tilde{w}$}}
+\def\tx{\mbox{\boldmath$\tilde{x}$}}
+\def\ty{\mbox{\boldmath$\tilde{y}$}}
+\def\tz{\mbox{\boldmath$\tilde{z}$}}
+%
+\def\tBeta{\mbox{\boldmath$\tilde{\eta}$}}
+\def\tbLambda{\mbox{\boldmath$\tilde{\Lambda}$}}
+%
+\def\Ah{\mbox{\boldmath$\hat{A}$}}
+\def\Bh{\mbox{\boldmath$\hat{B}$}}
+\def\Ch{\mbox{\boldmath$\hat{C}$}}
+\def\Dh{\mbox{\boldmath$\hat{D}$}}
+\def\Eh{\mbox{\boldmath$\hat{E}$}}
+\def\Fh{\mbox{\boldmath$\hat{F}$}}
+\def\Gh{\mbox{\boldmath$\hat{G}$}}
+\def\Hh{\mbox{\boldmath$\hat{H}$}}
+\def\Ih{\mbox{\boldmath$\hat{I}$}}
+\def\Jh{\mbox{\boldmath$\hat{J}$}}
+\def\Kh{\mbox{\boldmath$\hat{K}$}}
+\def\Lh{\mbox{\boldmath$\hat{L}$}}
+\def\Mh{\mbox{\boldmath$\hat{M}$}}
+\def\Nh{\mbox{\boldmath$\hat{N}$}}
+\def\Oh{\mbox{\boldmath$\hat{O}$}}
+\def\Ph{\mbox{\boldmath$\hat{P}$}}
+\def\Qh{\mbox{\boldmath$\hat{Q}$}}
+\def\Rh{\mbox{\boldmath$\hat{R}$}}
+\def\Sh{\mbox{\boldmath$\hat{S}$}}
+\def\Th{\mbox{\boldmath$\hat{T}$}}
+\def\Uh{\mbox{\boldmath$\hat{U}$}}
+\def\Vh{\mbox{\boldmath$\hat{V}$}}
+\def\Wh{\mbox{\boldmath$\hat{W}$}}
+\def\Xh{\mbox{\boldmath$\hat{X}$}}
+\def\Yh{\mbox{\boldmath$\hat{Y}$}}
+\def\Zh{\mbox{\boldmath$\hat{Z}$}}
+%
+\def\ah{\mbox{\boldmath$\hat{a}$}}
+\def\bh{\mbox{\boldmath$\hat{b}$}}
+\def\ch{\mbox{\boldmath$\hat{c}$}}
+\def\dh{\mbox{\boldmath$\hat{d}$}}
+\def\eh{\mbox{\boldmath$\hat{e}$}}
+\def\fh{\mbox{\boldmath$\hat{f}$}}
+\def\gh{\mbox{\boldmath$\hat{g}$}}
+\def\hh{\mbox{\boldmath$\hat{h}$}}
+\def\ih{\mbox{\boldmath$\hat{i}$}}
+\def\jh{\mbox{\boldmath$\hat{j}$}}
+\def\kh{\mbox{\boldmath$\hat{k}$}}
+\def\lh{\mbox{\boldmath$\hat{l}$}}
+\def\mh{\mbox{\boldmath$\hat{m}$}}
+\def\nh{\mbox{\boldmath$\hat{n}$}}
+\def\oh{\mbox{\boldmath$\hat{o}$}}
+\def\ph{\mbox{\boldmath$\hat{p}$}}
+\def\qh{\mbox{\boldmath$\hat{q}$}}
+\def\rh{\mbox{\boldmath$\hat{r}$}}
+\def\sh{\mbox{\boldmath$\hat{s}$}}
+\def\th{\mbox{\boldmath$\hat{t}$}}
+\def\uh{\mbox{\boldmath$\hat{u}$}}
+\def\vh{\mbox{\boldmath$\hat{v}$}}
+\def\wh{\mbox{\boldmath$\hat{w}$}}
+\def\xh{\mbox{\boldmath$\hat{x}$}}
+\def\yh{\mbox{\boldmath$\hat{y}$}}
+\def\zh{\mbox{\boldmath$\hat{z}$}}
+%
+\def\Gammah{\mbox{$\hat{\Gamma}$}}
+\def\Lambdah{\mbox{$\hat{\Lambda$}}}
+\def\Sigmah{\mbox{$\hat{\Sigma$}}}
+\def\Psih{\mbox{$\hat{\Psi$}}}
+\def\Deltah{\mbox{$\hat{\Delta$}}}
+\def\Xih{\mbox{$\hat{\Xi$}}}
+\def\Upsilonh{\mbox{$\hat{\Upsilon$}}}
+\def\Omegah{\mbox{$\hat{\Omega$}}}
+\def\Thetah{\mbox{$\hat{\Theta$}}}
+\def\Pih{\mbox{$\hat{\Pi$}}}
+\def\Phih{\mbox{$\hat{\Phi$}}}
+%
+\def\bGammah{\mbox{\boldmath$\hat{\Gamma}$}}
+\def\bLambdah{\mbox{\boldmath$\hat{\Lambda}$}}
+\def\bSigmah{\mbox{\boldmath$\hat{\Sigma}$}}
+\def\bPsih{\mbox{\boldmath$\hat{\Psi}$}}
+\def\bDeltah{\mbox{\boldmath$\hat{\Delta}$}}
+\def\bXih{\mbox{\boldmath$\hat{\Xi}$}}
+\def\bUpsilonh{\mbox{\boldmath$\hat{\Upsilon}$}}
+\def\bOmegah{\mbox{\boldmath$\hat{\Omega}$}}
+\def\bThetah{\mbox{\boldmath$\hat{\Theta}$}}
+\def\bPih{\mbox{\boldmath$\hat{\Pi}$}}
+\def\bPhih{\mbox{\boldmath$\hat{\Phi}$}}
+\def\Betah{\mbox{\boldmath$\hat{\eta}$}}
+%
+\def\define{\mbox{~$\stackrel{\triangle}{=}$~}}
+\def\Del{\mbox{$\Delta$}}
+\def\del{\mbox{$\delta$}}
+\def\eps{\mbox{$\epsilon$}}
+\def\QED{\hfill\mbox{Q.E.D}\par\endtrivlist\unskip}
+%
+\def\edot{\mbox{$\dot{\e}$}}
+\def\eddot{\mbox{$\ddot{\e}$}}
+\def\pdot{\mbox{$\dot{\p}$}}
+\def\pddot{\mbox{$\ddot{\p}$}}
+\def\qdot{\mbox{$\dot{\q}$}}
+\def\qddot{\mbox{$\ddot{\q}$}}
+\def\rdot{\mbox{$\dot{\r}$}}
+\def\rddot{\mbox{$\ddot{\r}$}}
+\def\xdot{\mbox{$\dot{\x}$}}
+\def\xddot{\mbox{$\ddot{\x}$}}
+\def\zdot{\mbox{$\dot{\z}$}}
+\def\zddot{\mbox{$\ddot{\z}$}}
+\def\Ddot{\mbox{$\dot{\D}$}}
+\def\Hdot{\mbox{$\dot{\H}$}}
+\def\Jdot{\mbox{$\dot{\J}$}}
+\def\Ndot{\mbox{$\dot{\N}$}}
+\def\Rdot{\mbox{$\dot{\R}$}}
+\def\Tdot{\mbox{$\dot{\T}$}}
+\def\Udot{\mbox{$\dot{\U}$}}
+\def\Vdot{\mbox{$\dot{\V}$}}
+\def\Wdot{\mbox{$\dot{\W}$}}
+\def\Zdot{\mbox{$\dot{\Z}$}}
+%%
+%%   Reference Abbreviation
+%%   ======================
+%%
+%\def\AR{{\em Advanced Robotics}}
+%\def\ACC{{\em Proc. of American Control Conference}}
+%\def\IJC{{\em Int. J. of Control}}
+%\def\JMD{{\em J. of Mechanical Design}}
+%\def\JRS{{\em J. of Robotic Systems}}
+%\def\DSMC{{\em Trans. of the ASME J. of Dyn. Syst., Meas. and Contr.}}
+%\def\MTAD{{\em Trans. of the ASME J. of Mechanisms, Transmission, and Automation
+%    in Design}}
+%\def\IJRR{{\em Int. J. of Robotics Research}}
+%\def\IJRA{{\em IEEE J. of Robotics and Automation}}
+%\def\ITRA{{\em IEEE Trans. on Robotics and Automation}}
+%\def\ITAC{{\em IEEE Trans. on Automatic Control}}
+%\def\ITIE{{\em IEEE Trans. on Industrial Electronics}}
+%\def\ISMC{{\em IEEE Trans. Syst., Man, Cybern.}}
+%\def\JIRS{{\em J. of Intelligent and Robotic System}}
+%\def\JOTA{{\em J. of Opt. Theory and Applications}}
+%\def\JRSJ{{\em J. of the Robotics Society of Japan}}
+%\def\ICAR{{\em Proc. of Int. Conf. on Advanced Robotics}}
+%\def\ICRA{{\em Proc. of IEEE Int. Conf. on Robotics and Automation}}
+%\def\IROS{{\em Proc. of IEEE/RSJ Int. Conf. on Intelligent Robots and Systems}}
+%\def\ISRR{{\em Int. Symp. of Robotic Research}}
+%\def\PSMC{{\em Proc. of IEEE Int. Conf. on Syst., Man, Cybern.}}
+%\def\JUSFA{{\em JAPAN--USA. Symp. on Flexible Automation}}
+%\def\IECON{{\em Proc. of IEEE Int. Conf. on Industrial Electronics}}
+%\def\CDC{{\em Proc. of Conf. on Decision and Control}}
+%
+%   New Command
+%   ===========
+%
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
+
+\newcommand{\EPSF}[2]{
+    \begin{center}
+    \begin{minipage}[t]{#1}     %   #1: Fig size
+        \epsfxsize=#1\epsffile{#2}  %   #2: PS filename
+    \end{minipage}
+    \end{center}
+}
+
+\newcommand{\FBOXEPSF}[2]{
+    \begin{minipage}[t]{#1}
+        \epsfxsize=#1\epsffile{#2}      %       #2: PS filename
+    \end{minipage}
+}
+
+
+%
+%   Title page format for manuscript
+%   ================================
+%
+%   Usage: \Cover{Title}{footnote}{authors}{pagestyle}{pagenumbering}
+%
+\newcommand{\Cover}[5]
+{
+    \thispagestyle{empty}
+    \baselineskip 7.0ex
+    \def\thefootnote{\fnsymbol{footnote}}
+    \begin{center}
+        {\Huge{\bf #1}}\footnote{#2}                \\
+        \vspace*{3cm}
+        \begin{Large}
+            {\bf #3}                    \\
+            \vspace*{3cm}
+            {\bf J. Cheong}         \\
+            \vspace*{3cm}
+        \end{Large}
+        \begin{Large}
+            {\sf Robotics Lab.}             \\
+            \vspace*{3ex}
+            {\sf School of Mechanical Engineering}      \\
+            \vspace*{3ex}
+            {\sf Pohang University of Science \& Technology}
+        \end{Large}
+    \end{center}
+
+    \newpage
+    \setcounter{section}{0}
+    \setcounter{page}{0}
+    \setcounter{equation}{0}
+    \pagestyle{#4}
+    \pagenumbering{#5}
+    \baselineskip 4.0ex         %   line spacing in text
+    \jot    1.0em               %   row spacing in eqnarray
+    \def\arraystretch{1.5}          %   row spacing in array
+}
+%
+%   Title page format for summary
+%   ================================
+%
+%   Usage: \NoteCover{Title}{Version}{pagestyle}{pagenumbering}
+%
+\newcommand{\NoteCover}[4]
+{
+    \Large
+    \thispagestyle{empty}
+    \baselineskip 2.5em
+    \begin{center}
+        {\Huge\bf #1}                   \\
+	{\sf Version #2}		\\ 
+      	\vspace*{5em}
+        {\sl by Syungkwon Ra $\&$ Jaeyoung Han}               \\
+        \vspace*{5em}
+        {\sf \today}                   \\
+        \vspace*{5em}
+        {\sc Robotics Lab.}             \\
+        \vspace*{1em}
+        {\sc School of Mechanical $\&$ Aerospace Engineering}      \\
+        \vspace*{1em}
+        {\sc Seoul National University} 
+    \end{center}
+
+    \newpage
+    \setcounter{section}{0}
+    \setcounter{page}{0}
+    \setcounter{equation}{0}
+    \pagestyle{#3}
+    \pagenumbering{#4}
+    \normalsize
+    \baselineskip 1.5em     %   line spacing in text
+    \jot    4.0pt           %   row spacing in eqnarray
+    \def\arraystretch{1.3}      %   row spacing in array
+}
+
+%
+%   Title page format for summary
+%   ================================
+%
+%   Usage: \Manuscript{heading}{Title}{pagestyle}{pagenumbering}
+%
+\newcommand{\Manuscript}[4]
+{
+    \thispagestyle{empty}
+    \baselineskip 7.0ex
+    \begin{flushleft}
+        {\underline{\Large\sf #1}}
+    \end{flushleft}
+    \vspace*{1cm}
+    \begin{center}
+        {\Huge{\bf #2}}                     \\
+        \vspace*{3cm}
+        \begin{Large}
+            {\bf by J. Cheong~ and~ J. Han}        \\
+            \vspace*{3cm}
+            \today                      \\
+            \vspace*{3cm}
+        \end{Large}
+        \begin{Large}
+            {\sf Robotics $\&$ Biomechatronics Lab.}             \\
+            \vspace*{3ex}
+            {\sf School of Mechanical Engineering}  \\
+            \vspace*{3ex}
+            {\sf Pohang University of Science \& Technology}
+        \end{Large}
+    \end{center}
+
+    \newpage
+    \setcounter{section}{0}
+    \setcounter{page}{0}
+    \setcounter{equation}{0}
+    \pagestyle{#3}
+    \pagenumbering{#4}
+    \baselineskip 1.5em
+    \jot    4.0pt           %   row spacing in eqnarray
+    \def\arraystretch{1.5}      %   row spacing in array
+}
+%
+%   Cover page format for Journal paper
+%   ===================================
+%
+%   Usage: \JCover{where}{title}{pagestyle}
+%
+\newcommand{\JCover}[3]
+{
+    \pagestyle{empty}
+    \setcounter{page}{0}
+    \large
+    \baselineskip 1.5em
+    \begin{flushleft}
+    \underline{\em #1}
+    \end{flushleft}
+
+    \vskip 5.0em
+
+    \baselineskip 2.0em
+    \begin{center}
+    {\Large\bf #2}
+    \end{center}
+
+    \baselineskip 1.5em
+    \vskip 2.0em
+
+    \begin{center}
+    Joono~Cheong$^{\ast}$,~
+    Wan~Kyun~Chung$^{\dagger}$, ~and~
+    Youngil~Youm$^{\dagger}$
+  %  Youngil~Youm$^{\dagger}$, ~and~
+  %  Wan~Kyun~Chung$^{\dagger}$
+    \end{center}
+
+    \vskip 4.0em
+
+    \begin{quote}
+    \begin{tabbing}
+        $\ast$ \= ~~Postdoctoral Researcher, Mechanical Eng.,
+        POSTECH:\\
+    ~~~~~jncheong@postech.ac.kr \\
+        $\dagger$ \> ~~Professor, School of Mech. Eng.,
+            POSTECH:  \\
+           ~~~~ wkchung@postech.ac.kr,~ youm@postech.ac.kr \\
+   %        ~~~~ youm@postech.ac.kr,~ wkchung@postech.ac.kr \\
+    \end{tabbing}
+%   Please address all the correspondence to Professor~Youngil~Youm.
+    \end{quote}
+\vskip 1.0em
+%~~The contents of this article are:
+%\begin{itemize}
+%\item Reply to the comments and questions by the referees.
+%\item The revised manuscript.
+%\end{itemize}
+    \vskip 3.0em
+%    \begin{quote}
+%   Please address all the correspondence to Professor~Youngil~Youm
+%~~~  Please address all the correspondence to Prof.~Wan~Kyun~Chung
+%    \end{quote}
+    \begin{quote}
+%$\bullet$ Total number of figures : 9    \\
+%$\bullet$ Total number of tables ~: 1     \\
+%$\bullet$ Total number of pages   ~: 23
+    \end{quote}
+    \vskip 3.0em
+
+    \begin{quote}
+    Robotics \& Biomechatronics Lab.,\\Department of Mechanical Engineering,       \\
+    Pohang University of Science \& Technology\,(POSTECH)       \\
+    San--31,~Hyoja--Dong,~Pohang,~790--784,~\underline{\sc KOREA}   \\
+    Fax:\,+82--54--279--5899,~~Tel:\,+82--54--279--2844
+    \end{quote}
+
+    \newpage
+    \normalsize
+    \setcounter{section}{0}
+    \setcounter{page}{0}
+    \setcounter{equation}{0}
+    \pagestyle{#3}
+    \pagenumbering{arabic}
+    \baselineskip 1.5em
+    \jot    4.0pt           %   row spacing in eqnarray
+    \def\arraystretch{1.5}      %   row spacing in array
+   % \def\thefootnote{\fnsymbol{footnote}}
+}
+%
+%   Cover page format for Proceedings
+%   =================================
+%
+%   Usage: \ProCover{where}{title}{pagestyle}
+%
+\newcommand{\ProCover}[3]
+{
+    \onecolumn
+    \def\thefootnote{\fnsymbol{footnote}}
+    \pagestyle{empty}
+    \setcounter{page}{0}
+    \large
+    \baselineskip 1.5em
+    \begin{flushleft}
+    \underline{\sf #1}
+    \end{flushleft}
+
+    \vskip 5.0em
+
+    \baselineskip 2.0em
+    \begin{center}
+    {\Large\bf #2}
+    \end{center}
+
+    \baselineskip 1.5em
+    \vskip 2.0em
+
+    \begin{center}
+    Joono~Cheong$^{\ast}$,~
+    Wan Kyun~Chung$^{\dagger}$,~ and~ Youngil~Youm$^{\ddagger}$~
+    \end{center}
+    \vskip 0.0em
+{\small
+    \begin{quote}
+    \begin{tabbing}
+        $\ast$ \= ~~Graduate student, School of Mechanical Engineering,
+    POSTECH : jncheong@postech.ac.kr\\
+        $\dagger$ \> ~~Professor, School of Mechanical
+     Engineering, POSTECH : wkchung@postech.ac.kr                  \\
+        $\ddagger$ \> ~~Professor, School of Mechanical Engineering,
+    POSTECH : youm@postech.ac.kr \\
+    \end{tabbing}
+    \end{quote}
+
+    \vskip 0.0em
+
+%    \begin{quote}
+%    Please address all the correspondence to Prof.~Wan Kyun~Chung
+%    \end{quote}
+
+    \vskip 0.0em
+
+    \begin{quote}
+    Robotics \& Bio-Mechatronics Lab.,~School of Mechanical Engineering,        \\
+    Pohang University of Science \& Technology\,(POSTECH)       \\
+    San--31,~Hyoja--Dong,~Pohang,~790--784,~\underline{\sc KOREA}   \\
+
+    Fax:\,+82--54--279--5899,~~Tel:\,+82--54--279--2844
+    \end{quote}
+}
+    \vskip 3.0em
+    \setlength{\baselineskip}{0.5em}
+\normalfont
+\section*{\centering \bf Abstract}
+We propose a PID composite controller for controlling
+flexible arms modeled by singular perturbation approach. For slow
+sub-controller, the PD plus disturbance observer is used, which
+eventually takes on PID form. And for fast sub-controller, modal
+feedback PID control is used. The integral action removes steady
+state error from step disturbance and imperfect gravity
+compensation though it complicates the analysis. We investigate
+effects of design parameters in the controller to closed loop
+response. Thereby, we can deliver a guideline for performance
+tuning for general flexible systems. Through simulation and
+experiments, the adequacy and performance of the proposed method
+are verified.
+%
+\section*{\centering \bf Contribution}
+The contribution of this paper has two folds; one is the
+design of PID composite controller, and
+the other is presenting an easy way for tuning performance
+based on the designed controller.
+To do this, for slow subsystem, disturbance observer is applied and
+for fast subsystem, PID modal feedback is used.
+We explain the roles of tuning parameters on the
+overall performance. We present an illustrative
+example by simulation and experiment.
+This method is possibly utilized to multi-link flexible robots.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section*{\centering \bf Abstract}
+%%%  Put here the Abstract or Contribution   %
+%In this paper, a simple direct parameter update rule is
+%presented to suppress the vibration more quickly,
+%considering the dynamics of flexible subsystem.
+%Different from most of adaptive control schemes in multi-link
+%flexible robots, which is
+%indirect model-independent approach,
+%the proposed adaptive control is a direct one and good for fast
+%suppression of vibration of uncertain and untuned systems.
+%Usually, the precise modeling of multi-link flexible robot is hard to
+%obtain and even if we can get it, it is difficult to use in the on-line
+%control tasks. Due to these reasons, a simplified model is used to
+%describe the robot dynamics. The modelling errors and other structured
+%uncertainty are considered as parameter perturbation.
+%We verify the effectiveness of the proposed
+%algorithm through experiments.
+%%
+%%
+%\section*{\centering \bf Contribution}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% Below is the contribution of paper: ICRA2001  %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%We present a simple and efficient adaptive control law which improves the
+%performance of vibration control algorithm.
+%Many other adaptive approaches are based upon the signal processing
+%technique using various filters and/or least square estimate.
+%Thus, there is little physical meaning for adaptation.
+%We formulate direct parameter update rule which minimizes the
+%residual vibration using flexible motion equation.
+%This was possible due to the application of bandwidth modulation
+%technique to separate the whole system into
+%rigid and flexible subsystems.
+%By updating the parameters,
+%the adaptive controller significantly and effectively reduces the
+%residual vibration. Using this algorithm, the
+%effort of time-consuming gain tuning can also be reduced because the
+%parameters automatically change to accommodate the vibration.
+%To robustify the
+%algorithm, we combine the parameter projection and dead zone
+%methods.  The experimental results showed the effectiveness of the
+%proposed algorithm.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Below is the contribution of paper: ISIM2000  %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Some dynamic properties of 3D flexible robot are obtained for the
+%lumped mass spring model. The direct modal feedback controller is
+%developed for the 3D vibration suppression for this model. To do
+%this, we perform the instantaneous modal transformation to make
+%the analysis and controller synthesis easier. After the modal
+%transformation, the stable horizontal and vertical vibration
+%suppression controller is obtained independently. We provides the
+%stable symmetric feedback for the horizontal vibration control and
+%direct inverse feedback for the vertical vibration control. Since
+%during the anthropomorphic 3D motion, horizontal vibration control
+%is not common and only a few works have reported the successful
+%results, our proposed control can be a good solution in that kind
+%of jobs.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Below is the contribution of paper: ICRA2000  %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The closed loop bandwidth of rigid sub-system is defined using
+%passivity-based approach and disturbance observer approach.
+%We showed that there is a mutually exclusive
+%relation between joint tracking performance and
+%vibration suppression capability with single bandwidth parameter.
+%We also propose a composite control strategy similar to singular
+%perturbation approach for the isolated system.
+%While the singular perturbation approach separates
+%rigid/flexible subsystem by the different time scales,
+%the proposed bandwidth modulation method separates two subsystems
+%by using the operating frequency ranges not by time scale.
+%Since the flexibly structured system shows the vibrational characteristics,
+%its frequency is the most important information which should be considered.
+%The proposed method fully utilizes this frequency information in the
+%determination of the bandwidth of rigid subsystem, but the singular
+%perturbation approach misses this information. Moreover, the proposed
+%method provides effective design way when the frequency characteristics of
+%external disturbances or unmodeled dynamics are known.
+%We verify experimentally that the composite control for the
+%isolated system is very good at vibration suppression.
+%The proposed bandwidth modulation method is general and can be
+%applied to any kind of flexible systems.
+%
+%
+   % \newpage
+    \normalsize
+%    \twocolumn
+%    \setcounter{section}{0}
+%    \setcounter{page}{0}
+%    \setcounter{equation}{0}
+%    \pagestyle{#3}
+%    \pagenumbering{arabic}
+%%   \baselineskip 1.35em
+%    \baselineskip 1.3em
+%    \jot    4.0pt           %   row spacing in eqnarray
+%    \def\arraystretch{1.5}      %   row spacing in array
+}
+
+%
+%   New Environment
+%   ===============
+%
+%   Usage: \begin{Assume}{(A.\arabic{newctr})}{newctr}
+%
+\newenvironment{Assume}[2]{\newcounter{#2}\begin{list}{#1}
+{\usecounter{#2}\setlength{\rightmargin}{\leftmargin}}}{\end{list}}
+
+\setlength\arraycolsep{1.2pt}       %   eqnarray column separation
+\renewcommand\figurename{Fig.}
+\def\fps@figure{h}

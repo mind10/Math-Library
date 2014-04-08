@@ -1,0 +1,61 @@
+_sfullvector
+
+_dfullvector
+  - dvector (dgevector)
+    - dvec3
+      - dmat3
+    - dse3
+
+_sfullmatrix
+
+_dfullmatrix
+  - dmatrix
+    - dgqmatrix
+      - dormatrix
+        - donmatrix
+          - dSO3
+      - dssmatrix
+        - dso3
+      - dhmat
+	  - dmat3
+      - dSE3
+
+_dpackedmatrix
+
+_dbandmatrkx
+
+_dtridmatrix
+
+-------------------------
+
+|> How do I calculate the determinant of a general complex matrix using LAPACK? 
+|> After LU factorization with zgetrf, what do I do next? Thanks for any help. 
+
+The LU factorization yields three matrices, the product of which is the original 
+complex matrix. Therefore the determinat is the product of the three determinants 
+of P, L and U. The determinant of the triangular matrices L and U is the product 
+of the elements on the diagonal - as for any triangular matrix (for L this is 1 
+as all elements of the diagonal are one.) The determinant of P is either +1 or -1 
+depending of whether the number of row permutations is even or odd. 
+
+
+-----------------
+
+donlp2.c, new.c user_eval.c 에 include에 kist/ 추가 
+donlp2.c, new.c user_eval.c 의 확장자를 cpp로 변환(c로 두면 C로 컴파일됨)
+donlp2_sub.cpp 파일 추가
+
+o8para.h 에, stdio.h 등을 cstdio로 바꿈.
+
+o8para.h 에 min, max define을 o8min, o8max로 바꿈 redefinition warning 때문..
+
+double -> int conversion 관한 다수 warning 수정.
+
+o8gene.h에서 const DOUBLE을 DOUBLE로 수정, linking 에러, 따라서 o8cons.h도 const DOUBLE을 DOUBLE로 수정.
+
+dscal, cscal을 o8dscal, o8cscal로 변경. (mkl과의 충돌때문에)
+
+
+
+
+

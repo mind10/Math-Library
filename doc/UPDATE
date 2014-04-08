@@ -1,0 +1,13 @@
+0.2.2 : 20071230, add 'double dmatrix::det(void)'
+0.2.3 : 20080129, bugfix at inv_rollpitchyaw (dso3.cpp)
+0.2.4 : 20080320 : delete 'dangles', add 'rollpitchyaw', add 'mean(int dim)'
+0.2.5 : 20080520 : dcspline - 3 methods - natural, clamped, not-a-knot- is added
+0.2.6 : 20080819 : add linux version
+0.2.7 : 20080910 : bug fix for gcc 4.1
+0.2.8 : 20080920 : dSO3::inv_euler add
+0.2.9 : 20080923 : dSE3::inv_Ad, dSE3::Ad add
+0.2.10 : 20090225 : about_rmcp revision
+0.2.11(garam) : 20090216 : drobotics : add quaternion_rotate, dpolynomial : poly5 add , mini bug fix
+0.2.12(garam) : 20090810 : bug fix for dmatrix->pca() function  
+0.3 : Convert to mkl 10.2.6
+0.3.1 : 20130924 - add new function dSE3 < rmcp::dmatrix exp(const rmcp::dmatrix &A, double theta) > ( not working) 

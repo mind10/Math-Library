@@ -1,0 +1,23 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}
+\BOOKMARK [1][-]{section.1.1}{Objective}{chapter.1}
+\BOOKMARK [1][-]{section.1.2}{Prerequisite}{chapter.1}
+\BOOKMARK [1][-]{section.1.3}{Directory}{chapter.1}
+\BOOKMARK [0][-]{chapter.2}{Classes}{}
+\BOOKMARK [1][-]{section.2.1}{Vector Class}{chapter.2}
+\BOOKMARK [1][-]{section.2.2}{Matrix Class}{chapter.2}
+\BOOKMARK [1][-]{section.2.3}{Derived Vecotr, Matrix Class}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.3.1}{Robotics}{section.2.3}
+\BOOKMARK [2][-]{subsection.2.3.2}{Lie Group}{section.2.3}
+\BOOKMARK [1][-]{section.2.4}{Optimization Class}{chapter.2}
+\BOOKMARK [1][-]{section.2.5}{Spline Class}{chapter.2}
+\BOOKMARK [1][-]{section.2.6}{=10100 =minusby252.50787by1000 »ó=10100 =minusby252.50787by1000 ¼ö}{chapter.2}
+\BOOKMARK [0][-]{chapter.3}{Install}{}
+\BOOKMARK [1][-]{section.3.1}{Windows}{chapter.3}
+\BOOKMARK [1][-]{section.3.2}{Linux}{chapter.3}
+\BOOKMARK [0][-]{chapter.4}{Optimization}{}
+\BOOKMARK [1][-]{section.4.1}{dsqoptimize Class}{chapter.4}
+\BOOKMARK [2][-]{subsection.4.1.1}{example 1 : simple}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.2}{example 2 : fmincon}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.3}{example 3 : portfol1}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.4}{example 4 : hs114new}{section.4.1}
+\BOOKMARK [0][-]{appendix.A}{Intel Math Kernel Library}{}

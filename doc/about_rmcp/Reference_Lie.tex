@@ -1,0 +1,680 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Reference: RMCP Library
+%
+%		Ra Syung-Kwon
+%   Center for Cognitive Robotics, KIST
+%
+%		version 0.3
+%		January 31, 2009
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,10pt]{article}
+\usepackage{amssymb, amsmath}
+\usepackage{hangul}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{epsfig}
+\usepackage{calc}
+\include{define}
+\addtolength{\textwidth}{3cm}
+\addtolength{\hoffset}{-1.5cm}
+
+\author{ Ra Syung-Kwon (syungkwon.ra@gmail.com) \\[2mm]
+Center for Cognitive Robotics, KIST }
+\date{version 0.21 \\[2mm] January 31, 2009}
+\title{Reference: RMCP library}
+
+\begin{document}
+
+\newenvironment{Lentry}[1]
+ {\begin{list}{}{
+  \renewcommand{\makelabel}[1]{\textsf{##1}\hfill}
+  \settowidth{\labelwidth}{\textsf{#1}}
+  \setlength{\leftmargin}{\labelwidth+\labelsep}  
+ }}{\end{list}}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% I N T R O D U C T I O N
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\subsection{Objective}
+RMCP Library는 일반적인 행렬에 대한 클래스(Matrix)와 Lie Group과 Lie Algebra에 속하는 행렬에 대한 클래스(so(3), SO(3), se(3), SE(3)), 그리고 이와 연관되어 사용되는 행렬에 대한 클래스(Vec3, Inertia, AInertia)을 C++로 구현한 라이브러리 이다. ISO/ANSI C++ 규격을 준수하였으며, 표준 라이브러리에만 기반하도록 설계되었다. 모든 소스코드는 Visual C++ .NET 2005(윈도우즈), GCC(G++) 3.2(리눅스)에서 테스트되었다.
+
+\subsection{Notation}
+\begin{Lentry}{Vec3(double w0, double)}
+\item[$\mathbf{1}$] identity matrix
+\item[$\M, \A, \B$, \x] General Matrix 
+\item[\v, \w, \m, \f, \p] three dimensional vector 
+\item[\R] Special Orthogonal Group $SO(3)$ 
+\item[\T] Special Euclidean Group $SE(3)$ 
+\item[\S, \V] $twist$  $se(3)$ 
+\item[\F] $wrench$  $se^*(3)$ 
+\item[\J] Generalized Inertia 
+\item[\Jh] Articulated Inertia 
+\end{Lentry}
+
+\vspace{2em}
+
+\subsection{Classes}
+Lie Library에서 사용하는 모든 행렬의 원소는 double type(double-precision floating point real number)만을 기준으로 작성되었다. float나 int type을 원소로 갖는 class는 존재하지 않는다. 따라서 기초적인 행렬 연산의 기반이 되어주는 linpack과 blas는 double type을 다루는 함수만을 따로 정리하여 사용하고 있으며, eispack도 마찬가지이다. 
+\begin{Lentry}{Vec3(double w0, )}
+\item[Matrix] General matrix 
+\item[Vec3] Three dimensional vector 
+\item[so3] Three dimensional skew-symmetric matrix $so(3)$
+\item[SO3] Special Orthogonal Group $SO(3)$ 
+\item[SE3] Special Euclidean Group $SE(3)$ 
+\item[se3] $twist$  $se(3)$ 
+\item[dse3] $wrench$  $se^*(3)$ 
+\item[Inertia] Generalized inertia 
+\item[AInertia] Articulated inertia 
+\item[Jacobian] Jacobian matrix
+\end{Lentry}
+
+\subsection{Namespace}
+Lie
+
+\subsection{Constants}
+
+\subsection{Type Definition}
+so(3)는 3차원 벡터를 단지 skew-symmetric 행렬의 형태로 다시쓴것에 불과하기 때문에 Lie Library에서는 so(3)를 따로 클래스로 만들지 않고, 3차원 벡터와 동일하게 취급한다. 일반적으로 so3 class는 거의 사용하지 않고, Vec3 class를 사용하는 것이 편리하다.
+\begin{verbatim}
+typedef Vec3 so3;
+\end{verbatim}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Matrix Class "\M"
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Matrix Class : \M}
+
+%%% member variables
+\subsection{Member Variables}
+
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[size\_t row\_] the number of rows
+\item[size\_t col\_] the number of columns
+\item[size\_t size\_] the size of allocated memory, = row\_ * col\_
+\item[double* element\_] the pointer to base of allocated memory 
+\end{Lentry}
+\M = {[}$m_{ij}${]} $\in \mathbb{R}^{row\_ \times col\_},\quad where \quad 0 \le i < row\_ ,\quad 0 \le j < col\_ ,\quad m_{ij} = element{[}i + j \times row\_{]}$
+
+%%% constructors
+\subsection{Constructors}
+
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[Matrix()] $\mathbb{R}^{0 \times 0}$  
+\item[Matrix(size\_t r, size\_t c)] $m_{ij}$ = ?, $\begin{bmatrix} ? & ? & \cdots & ? \\ ? & ? & \cdots & ? \\ \vdots & \vdots & \ddots & \vdots \\ ? & ? & \cdots & ? \end{bmatrix} \in \mathbb{R}^{r \times c}$ 
+\item[Matrix(size\_t r, size\_t c, double d)] $m_{ij}$ = d, $\begin{bmatrix} d & d & \cdots & d \\ d & d & \cdots & d \\ \vdots & \vdots & \ddots & \vdots \\ d & d & \cdots & d \end{bmatrix} \in \mathbb{R}^{r \times c}$ 
+\item[Matrix(\M)] \M
+\item[Matrix(size\_t r, size\_t c, double d{[]})] $m_{ij} = d{[}i+j \times col\_{]}$, \\ $\begin{bmatrix} d[0] & d[r] & \cdots & d[(c-1)r] \\ d[1] & d[r+1] & \cdots & d[rc-r+1] \\ \vdots & \vdots & \ddots & \vdots \\ d[r-1] & d[2r-1] & \cdots & d[c \times r-1] \end{bmatrix} \in \mathbb{R}^{r \times c}$
+\end{Lentry}
+
+%%% operators
+\subsection{Operators}
+
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[$+\M$]
+\item[$-\M$]
+\item[\~\M] $\M^{\mathsf{T}}$
+\item[\M{[size\_t i]}] return double element{[i]}, $0 \leq i < size\_ $
+\item[\M(size\_t i, size\_t j)] return double (i$^{th}$ row, j$^{th}$ column), $0 \leq i < row\_ $, $0 \leq j < col\_ $
+\item[$\M_1 = \M_2$]
+\item[$\M_1 += \M_2$] $\M_1$ and $\M_2$ have to be the same dimension
+\item[$\M_1 -= \M_2$] $\M_1$ and $\M_2$ have to be the same dimension
+\item[$\M *=$ double c]
+\item[$\M *$ double c]
+\item[double c $* \M$]
+\item[$\M /=$ double c]
+\item[$\M /$ double c]
+\item[$\M_1 + \M_2$] $\M_1$ and $\M_2$ have the same dimension
+\item[$\M_1 - \M_2$] $\M_1$ and $\M_2$ have the same dimension
+\item[$\M_1 * \M_2$] $\M_1 \M_2$, the column of $\M_1$ is equal to the row of $\M_2$,\\ call multiply\_AB(...) size\_ternally
+\item[$\M_1 | \M_2$] $\M_1 \M_2^{\mathsf{T}}$, the column of $\M_1$ is equal to the column of $\M_2$, \\ call multiply\_ABt(...) internally
+\item[$\M_1$ \^{} $\M_2$] $\M_1^{\mathsf{T}} \M_2$, the row of $\M_1$ is equal to the row of $\M_2$, \\ call multiply\_AtB(...) internally
+\item[$\M_1 \% \M_2$] $\M_1^{-1} \M_2$, $\M_1$ is square, the column of $\M_1$ is equal to the row of $\M_2$, \\ call solve\_AxeB(...) internally
+\item[$\M_1$ \& $\M_2$] $\M_1^{\mathsf{-T}} \M_2$, $\M_1$ is square, the row of $\M_1$ is equal to the row of $\M_2$, \\ call solve\_AtxeB(...) internally
+\item[$\M_1 == \M_2$] return bool
+\end{Lentry}
+
+%%% member functions
+\subsection{Member Functions}
+
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[\M.row()] Get the number of rows,  return size\_t 
+\item[\M.column()] Get the number of columns, return size\_t 
+\item[\M.size()] Get the size, return size\_t
+\item[\M.resize(size\_ r, size\_t c = 1)] resize \M  into $\mathbb{R}^{r \times c}$, $m_{ij} = ?$, return void 
+\item[\M.set(double d)] $m_{ij} = d,\quad \forall i,j$, return void
+\item[\M.normalize()] normalize using frobineous norm, return double frobineous norm
+\end{Lentry}
+
+\vspace{2em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Vec3 Class "\v"
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Vec3 Class : \v}
+
+%%% member variables
+\subsection{Member Variables}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[double v\_{[3]}]	$\v = \begin{bmatrix} v\_[0] \\ v\_[1] \\ v\_[2] \end{bmatrix}$
+\end{Lentry}
+
+%%% constructors
+\subsection{Constructors}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[Vec3()] $\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}$
+\item[Vec3(size\_t d)] $\begin{bmatrix} d \\ d \\ d \end{bmatrix}$
+\item[Vec3(double d)] $\begin{bmatrix} d \\ d \\ d \end{bmatrix}$
+\item[Vec3(double v{[]})] $\begin{bmatrix} v[0] \\ v[1] \\ v[2] \end{bmatrix}$
+\item[Vec3(double v0, double v1, double v2)] $\begin{bmatrix} v0 \\ v1 \\ v2 \end{bmatrix} $
+\item[Vec3($\v$)] $\v$
+\end{Lentry}
+
+%%% operators
+\subsection{Operators}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[$+\v$]
+\item[$-\v$]
+\item[\v{[size\_t i]}] return double $v\_[i]$
+\item[$\v_1 = \v_2 $]
+\item[$\v =$ double v{[3]}] 
+\item[$\v_1 += \v_2 $]
+\item[$\v_1 -= \v_2 $]
+\item[$\v *=$ double d]
+\item[$\v *$ double d]
+\item[double d $* \v$]
+\item[$\v \%= \T $] $\T^{-1} \v$
+\item[$\v *= \T $] $\T \v$
+\item[$\v_1 + \v_2 $]
+\item[$\v_1 - \v_2 $]
+\item[$\v_1 == \v_2 $] return bool
+\end{Lentry}
+	
+%%% member functions
+\subsection{Member Functions}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[\v.set(double v0, $\cdots$, double v2)]  $\v = \begin{bmatrix} v0 \\ v1 \\ v2 \\ \end{bmatrix}$ return void
+\item[\v.normalize()] $ \v = \frac{\v}{\Vert \v \Vert}$ return double $\Vert \v \Vert$
+\item[\v.rotate(\T)] $ \v = \R \v, \quad \T = \begin{bmatrix} \R & \p \\ 0 & 1 \end{bmatrix}$ return Vec3
+\item[\v.rotate(\T, $\v_1$)] $ \v = \R \v_1, \quad \T = \begin{bmatrix} \R & \p \\ 0 & 1 \end{bmatrix}$ return Vec3
+\item[\v.inv\_rotate(\T)] $ \v = \R^{\mathsf{T}} \v, \quad \T = \begin{bmatrix} \R & \p \\ 0 & 1 \end{bmatrix}$ return Vec3
+\item[\v.inv\_rotate(\T, $\v_1$)] $ \v = \R^{\mathsf{T}} \v_1, \quad \T = \begin{bmatrix} \R & \p \\ 0 & 1 \end{bmatrix}$ return Vec3
+\item[\v.to\_Matrix()] Get Vec3 as matrix form $\begin{bmatrix} \v_0 \\ \v_1 \\ \v_2 \end{bmatrix}$, return Matrix $\in \mathbb{R}^{3 \times 1}$
+\end{Lentry}
+
+\vspace{2em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% se(3) class "\S"
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{se3 Class : \S}
+
+%%% member variables
+\subsection{Member Variables}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[double w\_{[6]}] $\S = \begin{bmatrix} \w \\ \v \end{bmatrix}$ or $\begin{bmatrix} [\w] & \v \\ 0 & 0 \end{bmatrix}, \quad \w = \begin{bmatrix} w\_[0] \\ w\_[1] \\ w\_[2] \end{bmatrix} \quad \v=\begin{bmatrix} w\_[3] \\ w\_[4] \\ w\_[5] \end{bmatrix}$
+\end{Lentry}
+
+%%% constructors
+\subsection{Constructors}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[se3()] $\begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix}$
+\item[se3(double k)] $\begin{bmatrix} k \\ k \\ k \\ k \\ k \\ k \end{bmatrix}$
+\item[se3(double w0, $\cdots$, double w5)] $\begin{bmatrix} w0 \\ w1 \\ w2 \\ w3 \\ w4 \\ w5 \end{bmatrix}$
+\item[se3(\S)] \S
+\item[se3(\w, \v)] $\begin{bmatrix} \w \\ \v \end{bmatrix}$ 
+\end{Lentry}
+
+%%% operators	
+\subsection{Operators}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[+\S]
+\item[-\S]
+\item[$\S_1 = \S_2$]
+\item[$\S = $ double d] $\begin{bmatrix} d \\ d \\ d \\ d \\ d \\ d \end{bmatrix}$
+\item[$\S_1 += \S_2$]
+\item[$\S_1 -= \S_2$]
+\item[$\S_1 *= $ double d]
+\item[$\S_1 /= $ double d]
+\item[$\S_1 + \S_2$]
+\item[$\S_1 - \S_2$]
+\item[$\S_1 * $double d]
+\item[$\S_1 / $double d]
+\item[double d $* \S$] 
+\item[$\F * \S$] $\F^{\mathsf{T}}\S$ return double
+\item[$\S * \F$] $\S^{\mathsf{T}}\F$ return double
+\item[\S{[}size\_t i{]}] return double $w\_[i]$
+\item[$\S_1 == \S_2$] return bool
+\end{Lentry}
+
+%%% member functions
+\subsection{Member Functions}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[\S.set(double w0, $\cdots$, double w5)] $\S = \begin{bmatrix} w0 \\ w1 \\ w2 \\ w3 \\ w4 \\ w5 \end{bmatrix}$ return void
+\item[\S.Ad(\T, $\S_1$)] $\S = Ad_{\T} \S_1$ return void
+\item[\S.inv\_Ad(\T, $\S_1$)] $\S = Ad_{\T^{-1}} \S_1$ return void
+\item[\S.ad($\S_1$, $\S_2$)] $\S = ad_{\S_1} \S_2$ return void
+\item[\S.to\_Matrix()] Get se3 as matrix form $\begin{bmatrix} [\w] & \v \\ 0 & 0 \end{bmatrix}$, return Matrix $\in \mathbb{R}^{4\times4}$
+\end{Lentry}
+
+\vspace{2em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% dse(3) class "\F"
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{dse3 Class : \F}
+
+%%% member variables
+\subsection{Member Variables}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[double m\_{[6]}] $\F = \begin{bmatrix} \m \\ \f \end{bmatrix}, \quad \m=\begin{bmatrix} m\_[0] \\ m\_[1] \\ m\_[2] \end{bmatrix} \quad \f = \begin{bmatrix} m\_[3] \\ m\_[4] \\ m\_[5] \end{bmatrix}$
+\end{Lentry}
+
+%%% constructors
+\subsection{Constructors}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[dse3()] $\begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix}$
+\item[dse3(double d)] $\begin{bmatrix} d \\ d \\ d \\ d \\ d \\ d \end{bmatrix}$
+\item[dse3(double m0, $\cdots$, double m5)] $\begin{bmatrix} m0 \\ m1 \\ m2 \\ m3 \\ m4 \\ m5 \end{bmatrix}$
+\item[dse3(\F)] \F
+\item[dse3(\m, \f)] $\begin{bmatrix} \m \\ \f \end{bmatrix}$
+\item[dse3(double mass, $\dot{\V}$)] mass * $\dot{\V}$
+\end{Lentry}
+
+%%% operators
+\subsection{Operators}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[+\F]
+\item[-\F]
+\item[$\F_1 = \F_2$]
+\item[$\F = $ double d] $\begin{bmatrix} d \\ d \\ d \\ d \\ d \\ d \end{bmatrix}$
+\item[$\F_1 += \F_2$]
+\item[$\F_1 -= \F_2$]
+\item[$\F_1 *= $ double d]
+\item[$\F_1 /= $ double d]
+\item[$\F_1 + \F_2$]
+\item[$\F_1 - \F_2$]
+\item[$\F_1 * $double d]
+\item[double d $* \F$]
+\item[$\F * \S$] $\F^{\mathsf{T}}\S$ return double
+\item[$\S * \F$] $\S^{\mathsf{T}}\F$ return double
+\item[\F{[}size\_t i{]}] return double $m\_[i]$
+\item[$\F_1 == \F_2$] return bool
+\end{Lentry}
+
+%%% member functions
+\subsection{Member Functions}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[\F.set(double m0, $\cdots$, double m5)] $\F = \begin{bmatrix} m0 \\ m1 \\ m2 \\ m3 \\ m4 \\ m5 \end{bmatrix}$ return void
+\item[\F.dad($\S$, $\F_1$)] $\F = ad^{*}_{\S} \F_1$ return void
+\item[\F.dAd(\T, $\F_1$)] $\F = Ad^{*}_{\T} \F_1$ return void
+\item[\F.dAd(\p, $\F_1$)] $\F = Ad^{*}_{\T} \F_1, \quad \T = \begin{bmatrix} \mathbf{1} & \p \\ 0 & 1 \end{bmatrix}$ return void
+\item[\F.inv\_dAd(\p, \f)] $\F = Ad^{*}_{\T^{-1}} \F_1, \quad \T = \begin{bmatrix} \mathbf{1} & \p \\ 0 & 1 \end{bmatrix}, \quad \F_1 = \begin{bmatrix} 0 \\ \f \end{bmatrix}$ return void
+\item[\F.to\_Matrix()] Get dse3 as matrix form $\begin{bmatrix} [\m] & \f \\ 0 & 0 \end{bmatrix}$, return Matrix $\in \mathbb{R}^{4\times4}$
+\end{Lentry}
+
+\vspace{2em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% SO(3)	class "\R"
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{SO3 Class : \R}
+
+%%% member variables
+\subsection{Member Variables}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[double R\_{[9]}] $\R=\begin{bmatrix} R\_[0] & R\_[3] & R\_[6] \\ R\_[1] & R\_[4] & R\_[7] \\ R\_[2] & R\_[5] & R\_[8] \end{bmatrix}$
+\end{Lentry}
+
+%%% constructors
+\subsection{Constructors}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[SO3()] $\begin{bmatrix} 1.0 & 0 & 0 \\ 0 & 1.0 & 0 \\ 0 & 0 & 1.0 \end{bmatrix}$ 
+\item[SO3(\R)] $\R$ 
+\item[SO3(double d{[]}) ]  $\begin{bmatrix} d[0] & d[3] & d[6] \\ d[1] & d[4] & d[7] \\ R[2] & d[5] & d[8] \end{bmatrix}$
+\item[SO3(double R0, $\cdots$, double R8)]  $\begin{bmatrix} R0 & R3 & R6 \\ R1 & R4 & R7 \\ R2 & R5 & R8 \end{bmatrix}$
+\end{Lentry}
+
+%%% operators
+\subsection{Operators}
+\begin{Lentry}{Vec3(double w0, double w2, double w3) }
+\item[ \R(size\_t i, size\_t j)] return double (i+1$^{th}$ row, j+1$^{th}$ column)
+\item[ $\R_1 = \R_2$ ] 
+\item[ $\R_1 *= \R_2$ ] 	
+\item[ $\R_1 * \R_2$ ]  
+\item[ $\R *  \v$ ]  
+\item[ \~\R] $\R^{\mathsf{T}}$
+\item[ $\R_1 == \R_2$] return bool
+\end{Lentry}
+
+
+%%% member functions
+\subsection{Member Functions}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[\R.to\_Matrix()] Get SO3 as matrix form, return Matrix $\in \mathbb{R}^{3\times3}$
+\end{Lentry}
+
+
+\vspace{2em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% SE(3) class "\T"
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{SE3 Class : \T}
+
+%%% member variables
+\subsection{Member Variables}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[double T\_{[16]}] $\T= \begin{bmatrix} \R & \p \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} T\_[0] & T\_[4] & T\_[8] & T\_[12] \\ T\_[1] & T\_[5] & T\_[9] & T\_[13] \\ T\_[2] & T\_[6] & T\_[10] & T\_[14] \\ T\_[3] & T\_[7] & T\_[11] & T\_[15] \end{bmatrix}$ 
+\end{Lentry}
+
+%%% constructors
+\subsection{Constructors}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[SE3()] $\begin{bmatrix} 1.0 & 0 & 0 & 0 \\ 0 & 1.0 & 0 &0 \\ 0 & 0 & 1.0 & 0 \\ 0 & 0 & 0 & 1.0 \end{bmatrix} $
+\item[SE3(\T)] \T
+\item[SE3(double T0, $\cdots$, double T2, double T4, $\cdots$, double T6, double T8, $\cdots$, double T10,] 
+\item[double T12, $\cdots$, double T14)] $\begin{bmatrix}  T0 & T4 & T8 & T12 \\ T1 & T5 & T9 & T13 \\ T2 & T6 & T10 & T14 \\ 0 & 0 & 0 & 1 \end{bmatrix}$
+\item[SE3(\R, \p)] $\begin{bmatrix} \R & \p \\ 0 & 1.0 \end{bmatrix}$
+\item[SE3(\R)] $\begin{bmatrix} \R & 0  \\ 0 & 1.0 \end{bmatrix}$
+\item[SE3(\p)] $\begin{bmatrix} \mathbf{1} & \p \\ 0 & 1.0 \end{bmatrix}$
+\item[SE3(double d)] $\begin{bmatrix} 1.0 & 0 & 0 & d \\ 0 & 1.0 & 0 & d \\ 0 & 0 & 1.0 & d \\ 0 & 0 & 0 & 1.0 \end{bmatrix} $
+\item[SE3(double T{[]})] $\begin{bmatrix} T[0] & T[4] & T[8] & T[12] \\ T[1] & T[5] & T[9] & T[13] \\ T[2] & T[6] & T[10] & T[14] \\ 0 & 0 & 0 & 1 \end{bmatrix}$
+\end{Lentry}
+
+%%% operators
+\subsection{Operators}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[\T(size\_t i, size\_t j)] return double (i+1$^{th}$ row, j+1$^{th}$ column) 
+\item[\T {[} size\_t i{]}] return double $T\_[i]$
+\item[ $\T_1 = \T_2$ ]
+\item[ $\T_1 * \T_2$ ]
+\item[ $\T_1 / \T_2$ ] $T_1 T_2^{-1}, \qquad A/B*C \ne A / ( B * C )$
+\item[ $\T_1 \% \T_2$ ] $T_1^{-1} T_2, \qquad A * B \% C \ne A * ( B \% C )$
+\item[ $\T \% \v$ ] $\T^{-1} \v$
+\item[ $\T * \v$ ]  
+\item[ $\T_1 *= \T_2$ ]
+\item[ $\T_1 /= \T_2$ ]
+\item[ $\T_1 \%= \T_2$ ]
+\item[ $\T_1 == \T_2$] return bool
+\end{Lentry}
+
+%%% member functions
+\subsection{Member Functions}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[\T.set\_eye()] $\T=\mathbf{1}_{4\times4}$ return void
+\item[\T.set\_orientation(\R)] $\T = \begin{bmatrix} \R & ? \\ 0 & 1.0 \end{bmatrix}$ return SE3
+\item[\T.set\_position(\p)] $\T = \begin{bmatrix} ? & \p \\ 0 & 1.0 \end{bmatrix}$ return SE3
+\item[\T.translate(\v)] $\T = \T*\begin{bmatrix} \mathbf{1} & \v \\ 0 & 1.0 \end{bmatrix}$
+ return SE3
+\item[\T.rotate(\R)]   $\T = \T*\begin{bmatrix} \R & 0 \\ 0 & 1.0 \end{bmatrix}$ return SE3
+\item[\T.position()] return Vec3 \p
+\item[\T.orientation()] return SO3 \R
+\item[\T.exp(\S)] $\T = e^{\S}$ return void
+\item[\T.exp(\S, double $\theta$)] $\T = e^{\S \theta}$ return void
+\item[\T.rotZ(double $\theta$)] $\T = \begin{bmatrix} cos\theta & -sin\theta & 0 & 0 \\sin\theta & cos\theta & 0 & 0 \\ 0 & 0 & 1.0 & 0 \\ 0 & 0 & 0 & 1.0 \end{bmatrix} $ return void
+\item[\T.to\_Matrix()] Get SE3 as matrix form $\begin{bmatrix} \R & \p \\ 0 & 1 \end{bmatrix}$, return Matrix $\in \mathbb{R}^{4\times4}$
+\end{Lentry}
+
+
+\vspace{2em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Inertia class "\J"
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Inertia Class : \J}
+
+%%% member variables
+\subsection{Member Variables}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[double I\_{[6]}, r\_{[3]}, m\_] $\J = \begin{bmatrix} \I - \m[\r]^2 & \m[\r] \\ -\m[r] & \m\mathbf{1}\end{bmatrix}$ \\ $\I - \m[\r]^2 = \begin{bmatrix} I\_[0] & I\_[3] & I\_[4] \\ I\_[3] & I\_[1] & I\_[5] \\ I\_[4] & I\_[5] & I\_[2] \end{bmatrix}, \quad \m\r=\begin{bmatrix} r\_[0] \\ r\_[1] \\ r\_[2] \end{bmatrix}, \\ \m=m\_$
+\end{Lentry}
+
+%%% constructors 
+\subsection{Constructors}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[Inertia()]  $\I = \begin{bmatrix} 1.0 & 0.0 & 0.0 \\ 0.0 & 1.0 & 0.0 \\ 0.0 & 0.0 & 1.0 \end{bmatrix}, \quad \r = \begin{bmatrix} 0.0 \\ 0.0 \\ 0.0 \end{bmatrix}, \quad \m = 0.0 $
+\item[Inertia(double m)]  $\I = \begin{bmatrix} m & 0.0 & 0.0 \\ 0.0 & m & 0.0 \\ 0.0 & 0.0 & m \end{bmatrix}, \quad \r = \begin{bmatrix} 0.0 \\ 0.0 \\ 0.0 \end{bmatrix}, \quad \m = m $
+\item[Inertia(double mass, double Ixx, double Iyy, double Izz)] 
+\item[]  $\I = \begin{bmatrix} I_{xx} & 0.0 & 0.0 \\ 0.0 & I_{yy} & 0.0 \\ 0.0 & 0.0 & I_{zz} \end{bmatrix}, \quad \r=\begin{bmatrix} 0.0 \\ 0.0 \\ 0.0 \end{bmatrix}, \quad \m = $mass 
+\item[Inertia(double mass, double Ixx, double Iyy, double Izz, double Ixy, double Ixz, double Iyz, double r0, ] 
+\item[ double r1, double r2)] 
+\item[]  $\I = \begin{bmatrix} I_{xx} & I_{xy} & I_{xz} \\ I_{xy} & I_{yy} & I_{yz} \\ I_{xz} & I_{yz} & I_{zz} \end{bmatrix}, \quad \r=\begin{bmatrix} r0 \\ r1 \\ r2 \end{bmatrix}, \quad \m = $mass 
+\item[Inertia($\J$)]	$\J$
+\end{Lentry}
+
+%%% operators
+\subsection{Operators}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[ $\J * \dot{\V}$ ]	return dse3
+\item[ $\J * \dot{\v}$ ] $\J \dot{\V}, \quad \dot{\V} = \begin{bmatrix} 0 \\ \dot{\v} \end{bmatrix}$ return dse3
+\item[ $\J + \Jh$ ] return AInertia
+\item[ $\J - \Jh$ ] return AInertia 
+\item[ $\J = \J_{1}$ ] return Inertia
+\item[ $\J *= $ double x ] return Inertia
+\item[ double x $* \J$ ] return Inertia
+\item[ $\J_1 == \J_2$ ] return bool
+\end{Lentry}
+
+%%% member functions
+\subsection{Member Functions}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[ \J.mass(void)] return double $m\_$
+\item[ \J.center\_of\_mass()] return Vec3 \r
+\item[ \J.get\_inertia(double I{[]})] $I[0] = I_{xx},\ I[1] = I_{yy},\ I[2] = I_{zz},\ I[3] = I_{xy},\ I[4] = I_{xz},\ I[5] = I_{yz}$ return void
+\item[ \J.set\_mass(double mass)] \m = mass, return void
+\item[ \J.set\_center\_of\_mass(\v)] \r = \v, return void
+\item[ \J.set\_inertia(double Ixx, double Iyy, double Izz, double Ixy, double Ixz, double Iyz)] 
+\item[] $\I = \begin{bmatrix} I_{xx} & I_{xy} & I_{xz} \\ I_{xy} & I_{yy} & I_{yz} \\ I_{xz} & I_{yz} & I_{zz} \end{bmatrix} $ return void 
+\item[ \J.transform(\T)]   $\T = Ad^{*}_{\T} \J Ad_{\T}$ return Inertia
+\item[ \J.to\_Matrix()] Get Inertia as matrix form $\begin{bmatrix} \I - \m[\r]^2 & \m[\r] \\ -\m[r] & \m\mathbf{1}\end{bmatrix}$, return Matrix $\in \mathbb{R}^{6\times6}$
+\item[ \J.to\_array(double I{[]})] $\begin{bmatrix} I[0] & I[6] & I[12] & I[18] & I[24] & I[30] \\ I[1] & I[7] & I[13] & I[19] & I[25] & I[31] \\ I[2] & I[8] & I[14] & I[20] & I[26] & I[32] \\ I[3] & I[9] & I[15] & I[21] & I[27] & I[33] \\ I[4] & I[10] & I[16] & I[22] & I[28] & I[34] \\ I[5] & I[11] & I[17] & I[23] & I[29] & I[35] \end{bmatrix}$ \\ $ = \begin{bmatrix}I\_[0] & I\_[3] & I\_[4] & 0 & -r\_[2] & r\_[1] \\ I\_[3] & I\_[1] & I\_[5] & r\_[2] & 0 & -r\_[0] \\ I\_[4] & I\_[5] & I\_[2] & -r\_[1] & r\_[0] & 0 \\ 0 & r\_[2] & -r\_[1] & m\_ & 0 & 0 \\  -r\_[2] & 0 & r\_[0] & 0 & m\_ & 0 \\  r\_[1] & -r\_[0] & 0 & 0 & 0 & m\_ \end{bmatrix}$ \\ return void
+\end{Lentry}
+
+
+\vspace{2em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Articulated Inertia class "\Jh"
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{AInertia Class : \Jh}
+
+
+%%% member variables
+\subsection{Member Variables}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[double J\_{[36]}] $\Jh = \begin{bmatrix} J\_[0] & J\_[6] & J\_[12] & J\_[18] & J\_[24] & J\_[30] \\  J\_[1] & J\_[7] & J\_[13] & J\_[19] & J\_[25] & J\_[31] \\  J\_[2] & J\_[8] & J\_[14] & J\_[20] & J\_[26] & J\_[32] \\  J\_[3] & J\_[9] & J\_[15] & J\_[21] & J\_[27] & J\_[33] \\  J\_[4] & J\_[10] & J\_[16] & J\_[22] & J\_[28] & J\_[34] \\  J\_[5] & J\_[11] & J\_[117] & J\_[23] & J\_[29] & J\_[35] \end{bmatrix} $
+\end{Lentry}
+
+
+%%% constructors
+\subsection{Constructors}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[AInertia()] $\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 \\  \cdot & 0 & 0 & 0 & 0 & 0 \\ \cdot & \cdot & 0 & 0 & 0 & 0 \\ \cdot & \cdot & \cdot & 0 & 0 & 0 \\ \cdot & \cdot & \cdot & \cdot & 0 & 0 \\ \cdot & \cdot & \cdot & \cdot & \cdot & 0 \end{bmatrix}$
+\item[AInertia(double d)]  $\begin{bmatrix} d & d & d & d & d & d \\ \cdot & d & d & d & d & d \\ \cdot & \cdot & d & d & d & d \\ \cdot & \cdot & \cdot & d & d & d \\ \cdot & \cdot & \cdot & \cdot & d & d \\ \cdot & \cdot & \cdot & \cdot & \cdot & d \end{bmatrix}$
+\item[AInertia(\J)] \J 
+\item[AInertia($\Jh$)] $\Jh$
+\item[AInertia(double a0, $\cdots$, double a8, double b0, $\cdots$, double b8,	double c0, $\cdots$, double c8)]
+\item[ ]  $\begin{bmatrix} a0 & a3 & a6 & b0 & b3 & b6 \\ \cdot & a4 & a7 & b1 & b4 & b7 \\ \cdot & \cdot & a8 & b2 & b5 & b8 \\ \cdot & \cdot & \cdot & c0 & c3 & c6 \\ \cdot & \cdot & \cdot & \cdot & c4 & c7 \\ \cdot & \cdot & \cdot & \cdot & \cdot & c8 \end{bmatrix} $
+\end{Lentry}
+
+%%% operators
+\subsection{Operators}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[$+\Jh$]
+\item[$-\Jh$]
+\item[$\Jh * \dot{\V}$] return dse3
+\item[$\Jh * \F$] return se3
+\item[$\Jh_1 + \Jh_2$] return AInertia
+\item[$\Jh + \J$]	return AInertia
+\item[$\Jh_1 - \Jh_2$] return AInertia
+\item[$\Jh - \J$]	return AInertia
+\item[$\Jh_1 += \Jh_2$]
+\item[$\Jh += \J $]
+\item[$\Jh_1 -= \Jh$]
+\item[$\Jh -= \J $]
+\item[$\Jh \% \F$] $\Jh^{-1}\F$ return se3
+\item[ $\Jh_1 == \Jh_2$ ] return bool
+\end{Lentry}
+
+%%% member functions
+\subsection{Member Functions}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[\Jh.transform(\T)] $\Jh = Ad^{*}_{\T} \hat{\J} Ad_{\T}$ return AInertia
+\item[\Jh.add\_transform($\hat{\J_1}$, \T)] $\Jh += Ad^{*}_{\T} \hat{\J_1} Ad_{\T}$ return void
+\item[\Jh.subtract\_kroneckerProduct($\F_1$, $\F_2$)] $\Jh -= \F_1 \otimes \F_2$ return void
+\item[\Jh.to\_Matrix()] Get AInertia as matrix form, return Matrix $\in \mathbb{R}^{6\times6}$
+\item[\Jh.to\_array(double I{[]})] $\begin{bmatrix}
+ I[0] & I[6] & I[12] & I[18] & I[24] & I[30] \\
+ I[1] & I[7] & I[13] & I[19] & I[25] & I[31] \\
+ I[2] & I[8] & I[14] & I[20] & I[26] & I[32] \\
+ I[3] & I[9] & I[15] & I[21] & I[27] & I[33] \\
+ I[4] & I[10] & I[16] & I[22] & I[28] & I[34] \\
+ I[5] & I[11] & I[17] & I[23] & I[29] & I[35]
+ \end{bmatrix} \\ $ = $\begin{bmatrix}
+ J\_[0] & J\_[6] & J\_[12] & J\_[18] & J\_[24] & J\_[30] \\
+ J\_[6] & J\_[7] & J\_[13] & J\_[19] & J\_[25] & J\_[31] \\
+ J\_[12] & J\_[13] & J\_[14] & J\_[20] & J\_[26] & J\_[32] \\
+ J\_[18] & J\_[19] & J\_[20] & J\_[21] & J\_[27] & J\_[33] \\
+ J\_[24] & J\_[25] & J\_[26] & J\_[27] & J\_[28] & J\_[34] \\
+ J\_[30] & J\_[31] & J\_[32] & J\_[33] & J\_[34] & J\_[35]
+ \end{bmatrix} \\ $ retrun void
+\end{Lentry}
+
+
+\vspace{2em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Friend Functions 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Friend Functions}
+
+\subsection{Matrix}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[$<< \M$] ostream $\begin{array}{cccccc} [ & & & & & \\ & m_{0,0} & m_{0,1} & \cdots & m_{0, c-1} & ; \\ & m_{1,0} & m_{1,1} & \cdots & m_{1,c-1} & ; \\  & \vdots & \vdots & \ddots & \vdots &  \\ & m_{r-1,0} & m_{r-1,1} & \cdots & m_{r-1,c-1} & ; \\ ]; & & & & & \end{array}$
+\item[inv(\M)] return Matrix $\M^{-1}$
+\item[square\_sum(\M)] return double $\sum_{i} \sum_{j} m_{ij}^{2}$ 
+\item[fnorm(\M)] return double frobenious norm
+\item[trace(\M)] return double Tr(\M)
+\item[diag(\M)] return Matrix 
+\item[multiply\_AB(\M, \A, \B)] $\M = \A \times \B$, return void
+\item[multiply\_ABt(\M, \A, \B)] $\M = \A \times \B^{\mathsf{T}}$, return void
+\item[multiply\_AtB(\M, \A, \B)] $\M = \A^{\mathsf{T}} \times \B$, return void
+\item[solve\_AxeB(\A, \x, \B)] $\A \x = \B$, get \x, return bool
+\item[solve\_AtxeB(\A, \x, \B)] $\A \x = \B$, get \x, return bool
+\end{Lentry}
+
+\subsection{Lie Groups}
+\begin{Lentry}{Vec3(double w0, double w2, double w3)}
+\item[$<< \v$] ostream $\begin{array}{ccccc} [ & v\_[0] & v\_[1] & v\_[2] & ]; \end{array}$ 
+\item[$<< \S$] ostream $\begin{array}{cccccccc} [ & w\_[0] & w\_[1] & w\_[2] & w\_[3] & w\_[4] & w\_[5] & ]; \end{array}$ 
+\item[$<< \F$] ostream $\begin{array}{cccccccc} [ & m\_[0] & m\_[1] & m\_[2] & m\_[3] & m\_[4] & m\_[5] & ]; \end{array}$ 
+\item[$<< \R$] ostream $\begin{array}{ccccc} [ & & &  & \\ & R\_[0] & R\_[3] & R\_[6] & ; \\ & R\_[1] & R\_[4] & R\_[7] & ; \\ & R\_[2] & R\_[5] & R\_[8] & ; \\ ]; & & & & \end{array}$
+\item[$<< \T$] ostream $\begin{array}{cccccc} [ & & & & & \\ & T\_[0] & T\_[4] & R\_[8] & T\_[12] & ; \\ & T\_[1] & T\_[5] & T\_[9] & T\_[13] & ; \\ & T\_[2] & T\_[6] & T\_[10] & T\_[14] & ; \\ & 0.0 & 0.0 & 0.0 & 1.0 & ; \\ ]; & & & & & \end{array}$
+\item[ad(\v, $\S_2$)] $ad_{\S_1} \S_2, \quad \S_1 = \begin{bmatrix} 0 \\ \v \end{bmatrix}$ return se3
+\item[ad($\S_1$, $\S_2$)] $ad_{\S_1} \S_2$  return se3
+\item[Ad(\T, \S)] $Ad_{\T}\S$ return se3
+\item[Ad(\p, \S)] $Ad_{\T}\S, \quad \T = \begin{bmatrix} \mathbf{1} & \p \\ 0 & 1 \end{bmatrix}$ return se3 
+\item[cross($\v_1$, $\v_2$)] $\v_1 \times \v_2$ return Vec3
+\item[dad(\S, \F)] $ad^{*}_{\S}\F$  return dse3
+\item[dAd(\T, \F)] $Ad^{*}_{\T} \F$ return dse3
+\item[dAd(\p, \F)] $Ad^{*}_{\T} \F, \quad \T = \begin{bmatrix} \mathbf{1} & \p \\ 0 & 1 \end{bmatrix}$ return dse3
+\item[eulerZYX(\v)] $Rot(\hat{z},v[0])Rot(\hat{y},v[1])Rot(\hat{x},v[2])\ $ singularity: $v[1] = \pm \frac{\pi}{2}$ \\return SO3
+\item[eulerZYZ(\v)] $Rot(\hat{z},v[0])Rot(\hat{y},v[1])Rot(\hat{z},v[2])\ $ singularity: $v[1] = 0, \pi $ \\return SO3
+\item[exp(\v)] $ e^{[\v]}$ return SO3
+\item[exp(\v, double $\theta$)] $ e^{[\v]\theta} $ return SO3
+\item[exp(double w0, $\cdots$, double w2)] $e^{[\w]}, \quad \w = \begin{bmatrix} w0 \\ w1 \\ w2 \end{bmatrix}$ return SO3
+\item[exp(\S)] $e^{\S}$ return SE3
+\item[exp(\S, double $\theta$)] $e^{\S \theta}$  return SE3
+\item[inner($\v_1$, $\v_2$)] $\v_1 \centerdot \v_2$ return double 
+\item[inv(\R)] $ \R^{\mathsf{T}}$ return SO3
+\item[inv(\T)] $T^{-1}$  return SE3
+\item[inv(\J)] $\J^{-1}$  return AInertia
+\item[inv\_eulerZYX(\R)] inverse EulerZYX(\v)\\ return Vec3
+\item[inv\_eulerZYZ(\R)] inverse EulerZYZ(\v)\\  return Vec3
+\item[inv\_rotate(\T, \v)] $\R^{\mathsf{T}} \v, \quad \T = \begin{bmatrix} \R & \p \\ 0 & 1 \end{bmatrix}$ return Vec3
+\item[inv\_rotate(\T, \S)]$\begin{bmatrix} \R^{\mathsf{T}} \w \\ \R^{\mathsf{T}} \v \end{bmatrix}, \quad \T = \begin{bmatrix} \R & \p \\ 0 & 1 \end{bmatrix}, \quad \S = \begin{bmatrix} \w \\ \v \end{bmatrix}$ return se3
+\item[inv\_Ad(\T, \S)] $Ad_{\T^{-1}}\S = \begin{bmatrix} 0 \\ \R^{\mathsf{T}} \v \end{bmatrix}$ return se3, this has the same funtionality as inv\_rotate(\T, \v)
+\item[inv\_Ad(\T, \v)] $Ad_{\T^{-1}} \S, \quad \S = \begin{bmatrix} 0 \\ \v \end{bmatrix}$ return se3
+\item[inv\_dAd(\T, \F)] $Ad^{*}_{\T^{-1}} \F$ return dse3
+\item[kronecker\_product($\F_1$, $\F_2$)] $\F_1 \otimes \F_2$ return AInertia
+\item[kronecker\_product($\F_1$, $\F_2$, double d)] $d * \F_1 \otimes \F_2$ return AInertia
+\item[linearize(\T)] $(\T - \mathbf{1}_{4\times4})^{\vee}$ return se3
+\item[linear\_Ad(\p, \S)] $\begin{bmatrix} \w \\ \v \end{bmatrix} = Ad_{\T}\S, \quad \T = \begin{bmatrix} \mathbf{1} & \p \\ 0 & 1 \end{bmatrix}$ return Vec3(\w)
+\item[log(\R)] $log\R$ return Vec3
+\item[log(\T)] $log\T$ return se3
+\item[logR(\T)] $\begin{bmatrix} log\R \\ \p \end{bmatrix}, \quad \T = \begin{bmatrix} \R & \p \\ 0 & 1 \end{bmatrix}$ return se3
+\item[norm(\v)] $\Vert \v \Vert$ return double 
+\item[rotate(\T, \v)] $\R \v, \quad \T = \begin{bmatrix} \R & \p \\ 0 & 1 \end{bmatrix}$ return Vec3
+\item[rotate(\T, \S)] $\begin{bmatrix} \R \w \\ \R \v \end{bmatrix}, \quad \T = \begin{bmatrix} \R & \p \\ 0 & 1 \end{bmatrix}, \quad \S = \begin{bmatrix} \w \\ \v \end{bmatrix}$ return se3
+\item[rotX(double $\theta$)] $ \begin{bmatrix} 1.0 & 0 & 0 & 0 \\ 0  & cos\theta & -sin\theta & 0 \\ 0 & sin\theta & cos\theta & 0 \\ 0 & 0 & 0 & 1.0 \end{bmatrix} $ return SE3 
+\item[rotY(double $\theta$)] $ \begin{bmatrix} cos\theta & 0 & sin\theta & 0 \\ 0 & 1.0  & 0 & 0 \\ -sin\theta & 0 & cos\theta & 0 \\ 0 & 0 & 0 & 1.0 \end{bmatrix} $ return SE3
+\item[rotZ(double $\theta$)] $ \begin{bmatrix} cos\theta & -sin\theta & 0 & 0 \\sin\theta & cos\theta & 0 & 0 \\ 0 & 0 & 1.0 & 0 \\ 0 & 0 & 0 & 1.0 \end{bmatrix} $ return SE3
+\item[square\_sum(\v)] $v_1^{2} + v_2^{2} + v_3^{2}$ return double
+\item[square\_sum(\S)] $S_1^{2} + S_2^{2} + S_3^{2} + S_4^{2} + S_5^{2} + S_6^{2}$ return double
+\item[square\_sum(\F)] $F_1^{2} + F_2^{2} + F_3^{2} + F_4^{2} + F_5^{2} + F_6^{2}$  return double
+
+\end{Lentry}
+
+\section{linpack}
+d : double precision
+
+ch : cholesky decomposition
+ - dc
+ - dd
+ - ex
+ - ud
+
+gb : general band matrix : 4개
+ge : general matrix : 4개
+gt : tridiagonal matrix : sl 만
+pb : symmetric positive definit matrix stored in band form : 4개
+po : symmetric positive definit matrix : 4개
+pp : symmetric positive definit matrix stored in packed form : 4개
+pt : positive definit tridiagonal matrix : sl만
+si : symmetric matrix 
+sp : symmetric matrix stored in packed form
+tr : triangular matrix : co, di, sl 3개
+ - co : factors and condition
+ - di : det and inv
+ - fa : factors
+ - sl : solve
+
+qr : QR factorization
+ - dc :
+ - sl : coord transform, least square
+
+sv : singular value
+ - dc :
+
+\end{document}
+
